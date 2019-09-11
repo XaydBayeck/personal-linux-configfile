@@ -1,0 +1,50 @@
+open_with cacademo
+open_with cacafire
+cd .config
+rename rc.conf
+vim rc.conf
+open_with cacaview
+mkdir bin
+shell sudo mkdir bin
+shell sudo vim imgcat
+shell sudo chmod 777 ./imgcat
+delete
+sudo delete
+delete sudo
+shell sudo rm 
+shell imgcat classyTouch.png
+open_with imgcat
+shell sudo vim .zshrc
+shell vim imgcat
+shell imgcat after1-smaller.png
+open_with imagetops
+open_with img2txt
+shell ansimd changelog.md
+shell rm .scope.sh.swp
+shell vim rc.conf
+shell vim rifle.conf
+shell ansimd README.md
+shell rm -r bin
+shell rm
+set colorscheme snow
+set colorscheme default
+set colorscheme solarized
+set colorscheme jungle
+shell vim README.md.d
+delete --env
+shell rm --env
+shell scp ssh_host_dsa_key 112.193.129.217:C:\Users\Administrator\.ssh
+shell cacaview after1-smaller.png
+shell vim solo.sh
+shell vim vimrc
+search init
+search tom
+search to
+search tomcat
+shell . /solo.sh
+shell vim README.md
+search fc
+search ibus
+
+bulkrename 
+delete my-screenshot-2019-09-07 19-26-43 的屏幕截图.png_
