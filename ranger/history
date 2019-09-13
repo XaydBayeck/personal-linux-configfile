@@ -1,6 +1,3 @@
-open_with cacademo
-open_with cacafire
-cd .config
 rename rc.conf
 vim rc.conf
 open_with cacaview
@@ -45,6 +42,9 @@ shell . /solo.sh
 shell vim README.md
 search fc
 search ibus
+delete my-screenshot-2019-09-07 19-26-43 的屏幕截图.png_
+search nv
+search mark
 
 bulkrename 
-delete my-screenshot-2019-09-07 19-26-43 的屏幕截图.png_
+open_with 
