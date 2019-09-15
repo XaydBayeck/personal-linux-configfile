@@ -1,0 +1,149 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.jediEnabled": false,
+    "python.pythonPath": "/usr/bin/python3",
+    "editor.fontFamily": "Fira Code",
+    "workbench.colorTheme": "Monokai Dimmed",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    // vim config
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
+                "<C-i>"
+            ],
+            "after": [
+                "<up>"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "after": [
+                "<down>"
+            ]
+        },
+        {
+            "before": [
+                "<C-j>"
+            ],
+            "after": [
+                "<left>"
+            ]
+        },
+        {
+            "before": [
+                "<C-l>"
+            ],
+            "after": [
+                "<right>"
+            ]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "<CR>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+        {
+            "before": [
+                "i"
+            ],
+            "after": [
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "h"
+            ]
+        },
+        {
+            "before": [
+                "h"
+            ],
+            "after": [
+                "i"
+            ]
+        },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "i"
+            ],
+            "after": [
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "h"
+            ]
+        },
+        {
+            "before": [
+                "h"
+            ],
+            "after": [
+                "i"
+            ]
+        },
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    }
+}
