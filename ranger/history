@@ -1,11 +1,7 @@
-rename rc.conf
-vim rc.conf
-open_with cacaview
 mkdir bin
 shell sudo mkdir bin
 shell sudo vim imgcat
 shell sudo chmod 777 ./imgcat
-delete
 sudo delete
 delete sudo
 shell sudo rm 
@@ -48,3 +44,7 @@ search mark
 
 bulkrename 
 open_with 
+search ter
+shell 
+delete
+open_with vim
