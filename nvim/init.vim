@@ -74,17 +74,17 @@ noremap j h
 noremap i k
 noremap k j
 noremap l l
-noremap h i
 noremap I 5k
 noremap K 5j
 noremap J 7h
 noremap L 7l
-inoremap <C-n> <left>
-inoremap N <right>
 " N key: go to the start of the line
 noremap <C-j> 0
 " I key: go to the end of the line
 noremap <C-l> $
+
+noremap h i
+noremap H I
 
 inoremap jj <Esc>
 
@@ -129,7 +129,13 @@ map <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
 " Press space twice to jump to the next '<++>' and edit it
 map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
 
-" Spel, 'for' :['markdown', ', 'for' :['markdown', 'vim-plug']ap ` ~
+" Spelling Check with <space>sc
+map <LEADER>sc :set spell!<CR>
+noremap <C-x> ea<C-x>s
+inoremap <C-x> <Esc>ea<C-x>s
+
+" Press ` to change case (instead of ~)
+map ` ~
 
 imap <C-c> <Esc>zza
 nmap <C-c> zz
@@ -207,10 +213,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 " Plug 'davidhalter/jedi-vim'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-vim'
 Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-pyclang'
-Plug 'ncm2/ncm2-tern'
 Plug 'ncm2/ncm2-github'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
@@ -255,8 +258,7 @@ Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 
 " For general writing
@@ -304,25 +306,18 @@ let g:SnazzyTransparent = 1
 colorscheme snazzy
 set background=dark
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = '-'
+let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
-let g:airline_powerline_fonts = 1
-let g:airline_theme='deus'
-<
-" powerline symbols
-let g:airline_left_sep = 'î‚°'
-let g:airline_left_alt_sep = 'î‚±'
-let g:airline_right_sep = 'î‚²'
-let g:airline_right_alt_sep = 'î‚³'
+let g:airline_powerline_fonts = 0
+let g:airline_theme='simple'
 
-
-" let g:lightline = {
-"   \     'active': {
-"   \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
-"   \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
-"   \     }
-"   \ }
+let g:lightline = {
+  \     'active': {
+  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
+  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
+  \     }
+  \ }
 
 " ===
 " === NERDTree
@@ -400,8 +395,7 @@ let g:mkdp_preview_options = {
     \ 'maid': {},
     \ 'disable_sync_scroll': 0,
     \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams' : {}
+    \ 'hide_yaml_meta': 1
     \ }
 let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
@@ -500,7 +494,10 @@ let g:startify_lists = [
       \ { 'type': 'commands',  'header': ['   Commands']       },
       \ ]
 
-" Far./i€kb€kb/[€kb€kb^wwwh"€kr€kbjjAjjbbbbbbbbbea"€kr€kbjjk" Testring my own plugin
+" Far.vim
+nnoremap <silent> <LEADER>f :F  %<left><left>
+
+" Testring my own plugin
 if !empty(glob('~/Github/vim-calc/vim-calc.vim'))
   source ~/Github/vim-calc/vim-calc.vim
 endif

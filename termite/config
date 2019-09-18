@@ -41,24 +41,31 @@ scrollback_lines = 10000
 #scrollbar = off
 
 [colors]
-foreground = rgb(239, 240, 235)
-foreground_bold = rgb(239, 240, 235)
-background = rgba(40, 42, 56, 0.5)
+# If both of these are unset, cursor falls back to the foreground color,
+# and cursor_foreground falls back to the background color.
+#cursor = #dcdccc
+#cursor_foreground = #dcdccc
+
+#foreground = #dcdccc
+#foreground_bold = #ffffff
+#background = #3f3f3f
+
+# 20% background transparency (requires a compositor)
+background = rgba(63, 63, 63, 0.4)
 
 # If unset, will reverse foreground and background
 highlight = #2f2f2f
 
-# Colors from original hyper-snazzy theme
-color0 = rgb(40,42,56)
-color1 = rgb(255,92,87)
-color2 = rgb(90,247,142)
-color3 = rgb(243,249,157)
-color4 = rgb(87,199,255)
-color5 = rgb(255,106,193)
-color6 = rgb(154,237,254)
-color7 = rgb(241,241,240)
-
-# Other default termite colors
+# Colors from color0 to color254 can be set
+color0 = #3f3f3f
+color1 = #705050
+color2 = #60b48a
+color3 = #dfaf8f
+color4 = #506070
+color5 = #dc8cc3
+color6 = #8cd0d3
+color7 = #dcdccc
+color8 = #709080
 color9 = #dca3a3
 color10 = #c3bf9f
 color11 = #f0dfaf
