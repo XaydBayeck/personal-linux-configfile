@@ -1,0 +1,241 @@
+[colors]
+background = 
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/tbar]
+dpi = 80
+width = 100%
+height = 25
+
+offset-x = 0
+offset-y = 0
+
+spacing = 5
+padding-left = 5
+padding-right = 5
+
+;radius-bottom = 20.0
+fixed-center = true
+
+line-size = 1
+line-color = ${colors.secondary}
+
+;background = #222d31
+background = #0866edf5
+foreground = ${colors.foreground}
+
+separator = |
+
+font-0 = fixed:pixelsize=12;1
+font-1 = "DejaVuSansMono Nerd Font:pixelsize=12;1"
+font-2 = "Font Awesome:pixelsize=12;1"
+
+tray-position = right
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = i3 xwindow
+modules-center = date
+modules-right = temperature wlan battery powermenu
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline =
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = #55d5ff
+
+[module/xwindow]
+type = internal/xwindow
+format = <label>
+format-background = #2c6674
+format-foreground = #000
+format-padding = 4
+
+label = %title:0:30:...%
+
+label-empty = 
+label-empty-foreground = #000
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline =
+label-connected = %essid%%upspeed:9%%downspeed:9%
+
+;format-disconnected =
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname% 
+label-disconnected-foreground = #c7de50
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = #50dec1
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y年%m月%d日"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = %date% %time%
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+ws-icon-default = 
+
+;lable-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #ffffff
+;label-mode-background = ${colors.primary}
+label-mode-background = $000000
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-foreground = $ffffff
+label-focused-background = $333333
+label-focused-underline= $a766f5
+label-focused-padding = 4
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-foreground = $888888
+label-unfocused-background = $222222
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+label-separator = |
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close = 
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = 
+menu-0-0-exec = menu-open-1
+menu-0-1 = 
+menu-0-1-exec = menu-open-2
+
+;menu-1-0 = 
+;menu-1-0-exec = menu-open-0
+menu-1-0 = 
+menu-1-0-exec = sudo reboot
+
+;menu-2-0 = 
+;menu-2-0-exec = menu-open-0
+menu-2-0 = 
+menu-2-0-exec = sudo poweroff
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+;format-charging = <animation-charging> <bar-capacity>
+format-charging-underline =
+
+format-discharging = <animation-discharging> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = #94f279
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = #94f279
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-foreground = #94f279
+animation-discharging-framerate = 750
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+
+throttle-input-for = 30
+
+screenchange-reload = true
+
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+pseudo-transparency = false
+
