@@ -1,0 +1,42 @@
+{
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    },
+    "clangd": {
+      "command": "clangd",
+      "args": ["--background-index"],
+      "rootPatterns": ["compile_flags.txt","compile_commands.json",".vim/",".git/",".hg/"],
+      "filetypes": ["c","cpp","objc","objcpp"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "metals": {
+      "command": "metals-vim",
+      "rootPatterns": ["build.sbt"],
+      "filetypes": ["scala","sbt"]
+    },
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmPath": "elm",
+        "elmFormatPath": "elm-format",
+        "elmTestPath": "elm-test",
+        "elmAnalyseTrigger": "change"
+      }
+    },
+    "julia": {
+      "command": "/usr/bin/julia",
+      "args": ["--startup-file=no","--history-file=no","-e","using LanguageServer;\n  using Pkg;\n  import StaticLint;\n  import SymbolServer;\n  env_path=dirname(Pkg.Types.Context().env.project_file);\n debug=false;\n  server=LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, \"\", Dict());\n server.runlinter=true;\n  run(server);"],
+      "filetypes": ["julia"]
+    }
+  }
+}

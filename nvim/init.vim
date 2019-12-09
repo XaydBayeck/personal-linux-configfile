@@ -87,6 +87,8 @@ noremap h i
 noremap H I
 
 inoremap jj <Esc>
+inoremap <C-l> <right>
+inoremap <C-j> <left>
 
 map s <nop>
 map S :w<CR>
@@ -130,7 +132,7 @@ map <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
 map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
 
 " Spelling Check with <space>sc
-map <LEADER>sc :set spell!<CR>
+map <A-s>c :set spell!<CR>
 noremap <C-x> ea<C-x>s
 inoremap <C-x> <Esc>ea<C-x>s
 
@@ -167,9 +169,14 @@ func! CompileRunGcc()
     :vertical resize-20
     :term python3 %
   elseif &filetype == 'html'
-    exec "!chromium % &"
+    exec "!firefox % &"
   elseif &filetype == 'markdown'
     exec "MarkdownPreview"
+  elseif &filetype == 'julia'
+    set splitright
+    :vsp
+    :vertical resize-20
+    :term julia %
   endif
 endfunc
 
@@ -204,22 +211,10 @@ Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
 " Taglist
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 
-" Error checking
-"Plug 'w0rp/ale'
 
 " Auto Complete
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'davidhalter/jedi-vim'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'ncm2/ncm2'
-"Plug 'ncm2/ncm2-jedi'
-"Plug 'ncm2/ncm2-github'
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
-"Plug 'ncm2/ncm2-match-highlight'
-"Plug 'ncm2/ncm2-markdown-subscope'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'derekwyatt/vim-scala'
 
 " Language Server
 Plug 'autozimu/LanguageClient-neovim', {
@@ -258,7 +253,7 @@ Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 
 " For general writing
@@ -286,6 +281,16 @@ Plug 'vim-scripts/restore_view.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
 Plug 'roxma/nvim-yarp'
+
+" julia
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'yianwillis/vimcdoc'
+
+" vim-easymotion
+Plug 'easymotion/vim-easymotion'
+
+" editconfig
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
@@ -390,7 +395,7 @@ set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
+inoremap <silent><expr> <A-TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
@@ -520,7 +525,7 @@ let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
 let g:mkdp_open_to_the_world = 0
 let g:mkdp_open_ip = ''
-let g:mkdp_browser = 'chromium'
+let g:mkdp_browser = 'firefox'
 let g:mkdp_echo_preview_url = 0
 let g:mkdp_browserfunc = ''
 let g:mkdp_preview_options = {
@@ -562,11 +567,11 @@ map <LEADER>gy :Goyo<CR>
 " " ===
 " " === CtrlP
 " " ===
-" map <C-p> :CtrlP<CR>
-" let g:ctrlp_prompt_mappings = {
-  " \ 'PrtSelectMove("j")':   ['<c-e>', '<down>'],
-  " \ 'PrtSelectMove("k")':   ['<c-u>', '<up>'],
-  " \ }
+map <C-p> :CtrlP<CR>
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtSelectMove("j")':   ['<c-e>', '<down>'],
+  \ 'PrtSelectMove("k")':   ['<c-u>', '<up>'],
+  \ }
 
 
 " ===
@@ -631,6 +636,31 @@ let g:startify_lists = [
 
 " Far.vim
 nnoremap <silent> <LEADER>f :F  %<left><left>
+
+" ===
+" === vim-easymotion
+" ===
+" Disable default mapping
+let g:EasyMotion_do_mapping=0
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{chra}{label}`
+nmap <Leader>S <Plug>(easymotion-overwin-f)
+" or
+" `s{chra}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
+
+" Trun on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>n <Plug>(easymotion-j)
+map <Leader>p <Plug>(easymotion-k)
+
+" ===
+" === editconfig
+" ===
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*', 'scp://.\*']
 
 " Testring my own plugin
 if !empty(glob('~/Github/vim-calc/vim-calc.vim'))
