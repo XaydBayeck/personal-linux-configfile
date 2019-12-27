@@ -1,7 +1,3 @@
-shell sudo vim imgcat
-shell sudo chmod 777 ./imgcat
-sudo delete
-delete sudo
 shell sudo rm 
 shell imgcat classyTouch.png
 open_with imgcat
@@ -48,3 +44,7 @@ open_with nvim
 
 shell code ~/.config/nvim/plugged/markdown-preview.nvim/
 delete
+search quit
+search
+rename core_perl
+search no
