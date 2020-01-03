@@ -240,18 +240,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 
-" HTML, CSS, JavaScript, PHP, JSON, etc.
-Plug 'elzr/vim-json'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
-Plug 'mattn/emmet-vim'
-
-" Python
-Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
@@ -292,6 +280,14 @@ Plug 'easymotion/vim-easymotion'
 " editconfig
 Plug 'editorconfig/editorconfig-vim'
 
+" latex
+Plug 'lervag/vimtex'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 call plug#end()
 
 " ===
@@ -500,12 +496,18 @@ nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <space>J  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>K  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>P  :<C-u>CocListResume<CR>
+" yarnk clipboard history
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
+" Open a terminal blow window
+map <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
+
+" Press space twice to jump to the next '<++>' and edit it
 " ===
 " === vim-indent-guide
 " ===
@@ -666,6 +668,14 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.\*', 'scp://.\*']
 if !empty(glob('~/Github/vim-calc/vim-calc.vim'))
   source ~/Github/vim-calc/vim-calc.vim
 endif
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 let g:user_emmet_leader_key='<C-f>'
 " Open the _machine_specific.vim file if it has just been created

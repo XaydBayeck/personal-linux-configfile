@@ -3,12 +3,14 @@
     "coc-css": ">=1.2.2",
     "coc-emmet": ">=1.1.4",
     "coc-html": ">=1.2.1",
-    "coc-java": ">=1.4.5",
+    "coc-java": ">=1.4.6",
     "coc-json": ">=1.2.4",
     "coc-marketplace": ">=1.5.0",
     "coc-omnisharp": ">=0.0.23",
     "coc-python": ">=1.2.6",
-    "coc-tsserver": ">=1.4.6",
-    "coc-yaml": ">=1.0.2"
+    "coc-tsserver": ">=1.4.9",
+    "coc-vimtex": ">=1.0.2",
+    "coc-yaml": ">=1.0.2",
+    "coc-yank": ">=1.1.3"
   }
 }
