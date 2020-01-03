@@ -284,10 +284,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'lervag/vimtex'
 
 " Track the engine.
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 " ===

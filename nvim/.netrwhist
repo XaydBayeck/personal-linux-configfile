@@ -1,5 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/sid/Github/personal-linux-configfile/.gitignore'
+let g:netrw_dirhist_0='/usr/share/texinfo'
+let g:netrw_dirhist_9='/run/mpd'
+let g:netrw_dirhist_8='/etc/gtk-3.0'
+let g:netrw_dirhist_7='/home/sid/Github/classnote'
+let g:netrw_dirhist_6='/home/sid/.config/alacritty'
+let g:netrw_dirhist_5='/home/sid/.local/share'
+let g:netrw_dirhist_4='/home/sid/.local'
 let g:netrw_dirhist_3='/home/sid/octave/custom'
 let g:netrw_dirhist_2='/home/sid/octave'
-let g:netrw_dirhist_1='/home/sid/.config/nvim'
