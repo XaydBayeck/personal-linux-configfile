@@ -15,8 +15,8 @@
 " ===
 " === Auto load for first time uses
 " ===
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim_back/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim_back/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -129,7 +129,7 @@ map <LEADER>l <C-w>l
 map <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
-map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
+map <LEADER><LEADER>j <Esc>/<++><CR>:nohlsearch<CR>c4i
 
 " Spelling Check with <space>sc
 map <A-s>c :set spell!<CR>
@@ -177,6 +177,10 @@ func! CompileRunGcc()
     :vsp
     :vertical resize-20
     :term julia %
+  elseif &filetype == 'go'
+    :vsp
+    :vertical resize-20
+    :term go run %
   endif
 endfunc
 
@@ -194,7 +198,7 @@ endfunc
 
 " ===
 " === Install Plugins with vim-Plug
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.config/nvim_back/plugged')
 " Pretty Dress
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -274,8 +278,11 @@ Plug 'roxma/nvim-yarp'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'yianwillis/vimcdoc'
 
+" go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " vim-easymotion
-Plug 'easymotion/vim-easymotion'
+Plug 'asvetliakov/vim-easymotion'
 
 " editconfig
 Plug 'editorconfig/editorconfig-vim'
@@ -288,6 +295,7 @@ Plug 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
+
 call plug#end()
 
 " ===
@@ -296,9 +304,9 @@ call plug#end()
 let has_machine_specific_file = 1
 if empty(glob('~/.config/nvim/_machine_specific.vim'))
   let has_machine_specific_file = 0
-  silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
+  silent! exec "!cp ~/.config/nvim_back/default_configs/_machine_specific_default.vim ~/.config/nvim_back/_machine_specific.vim"
 endif
-source ~/.config/nvim/_machine_specific.vim
+source ~/.config/nvim_back/_machine_specific.vim
 
 " ===
 " === Dress up my vim
@@ -462,9 +470,9 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Create mappings for function text object, requires document symbols feature of
 " languageserver.
 
-xmap if <Plug>(coc-funcobj-i)
+xmap sf <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
+omap sf <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
@@ -504,10 +512,6 @@ nnoremap <silent> <space>P  :<C-u>CocListResume<CR>
 " yarnk clipboard history
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
-" Open a terminal blow window
-map <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
-
-" Press space twice to jump to the next '<++>' and edit it
 " ===
 " === vim-indent-guide
 " ===
@@ -544,10 +548,26 @@ let g:mkdp_highlight_css = ''
 let g:mkdp_port = ''
 let g:mkdp_page_title = '「${name}」'
 
-" ===
-" === Python-syntax
-" ===
-" let g:python_highlight_all = 1
+" ------------------- vim-go.vim configuration --------------------
+" use golang language server
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" Highlight more info
+" let g:go_highlight_build_constraints = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+" let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+" let g:go_highlight_structs = 1
+let g:go_highlight_types = 0
+" highlight same variable in view
+let g:go_auto_sameids = 0
+" show type info in statusbar
+let g:go_auto_type_info = 1
+" disable gd mapping of vim-go
+let g:go_def_mapping_enabled = 0
+" -------------------- vim-go.vim configuration finished --------------------
 
 " ===
 " === Taglist
@@ -626,7 +646,7 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 
 " My snippits
-source ~/.config/nvim/snippits.vim
+source ~/.config/nvim_back/snippits.vim
 
 
 " Startify
@@ -642,22 +662,20 @@ nnoremap <silent> <LEADER>f :F  %<left><left>
 " ===
 " === vim-easymotion
 " ===
-" Disable default mapping
-let g:EasyMotion_do_mapping=0
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{chra}{label}`
-nmap <Leader>S <Plug>(easymotion-overwin-f)
-" or
-" `s{chra}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-" Trun on case-insensitive feature
-let g:EasyMotion_smartcase = 1
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
 
-" JK motions: Line motions
-map <Leader>n <Plug>(easymotion-j)
-map <Leader>p <Plug>(easymotion-k)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " ===
 " === editconfig
@@ -680,5 +698,5 @@ let g:UltiSnipsEditSplit="vertical"
 let g:user_emmet_leader_key='<C-f>'
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
-  exec "e ~/.config/nvim/_machine_specific.vim"
+  exec "e ~/.config/nvim_back/_machine_specific.vim"
 endif
